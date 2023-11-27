@@ -1,11 +1,9 @@
-#include<bits/stdc++.h>
-
-using namespace std;
+#include <stdio.h>
 
 int main()
 {
 	int n;
-	cin >> n;
-	cout << "25" ;
+	scanf("%d", &n);
+	printf("25");
 	return 0;
 }
