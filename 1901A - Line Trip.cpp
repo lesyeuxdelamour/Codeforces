@@ -210,16 +210,13 @@ int main()
     {
         int n, x;
         scanf("%d%d", &n, &x);
-        int arr[n + 2], diff[n];
-        arr[0] = 0;
-        for (int i = 1; i <= n; ++i)
-            scanf("%d", &arr[i]);
-        arr[n + 1] = x;
+        int arr[n];
         for (int i = 0; i < n; ++i)
-            diff[i] = arr[i + 1] - arr[i];
-        diff[n] = (arr[n + 1] - arr[n]) * 2;
-        qsort(diff, n + 1, sizeof(int), cmpIncrease);
-        printf("%d\n", diff[n]);
+            scanf("%d", &arr[i]);
+        int ans = max(arr[0] - 0, 2 * (x - arr[n - 1]));
+        for (int i = 1; i < n; ++i)
+            ans = max(ans, arr[i] - arr[i - 1]);
+        printf("%d\n", ans);
     }
     return 0;
 }

@@ -1,25 +1,46 @@
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int n;
-char name[10001][33];
-int f[10001];
+struct user
+{
+	char name[33];
+	int fre, id;
+};
+
+int cmpname(const void *a, const void *b)
+{
+	struct user u = *(struct user *)a;
+	struct user v = *(struct user *)b;
+	if(strcmp(u.name, v.name) == 0)
+		return u.id - v.id;
+	return strcmp(u.name, v.name);
+}
+
+int cmppos(const void *a, const void *b)
+{
+	struct user u = *(struct user *)a;
+	struct user v = *(struct user *)b;
+	return u.id - v.id;
+}
 
 int main()
 {
-	scanf("%d", &n);
-	for(int i = 0; i < n; ++i)
+	int n;
+	scanf("%d\n", &n);
+	struct user mail[n];
+	for (int i = 0; i < n; ++i)
 	{
-		scanf("%s", name[i]);
-		if(i)
-			for(int j = i-1; j >= 0; --j)
-				if(strcmp(name[j], name[i]) == 0)
-					f[i]++;
+		scanf("%s", mail[i].name);
+		mail[i].id = i;
+		mail[i].fre = 1;
 	}
-	for(int i = 0; i < n; ++i)
-		if(f[i])
-			printf("%s%d\n", name[i], f[i]);
-		else
-			printf("OK\n");
+	qsort(mail, n, sizeof(struct user), cmpname);
+	for (int i = 1; i < n; ++i)
+		if (strcmp(mail[i].name, mail[i - 1].name) == 0)
+			mail[i].fre += mail[i - 1].fre;
+	qsort(mail, n, sizeof(struct user), cmppos);
+	for (int i = 0; i < n; ++i)
+		printf(mail[i].fre == 1 ? "OK\n" : "%s%d\n", mail[i].name, mail[i].fre - 1);
 	return 0;
 }
