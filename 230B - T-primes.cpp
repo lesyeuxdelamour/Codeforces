@@ -1,10 +1,7 @@
-#include<stdio.h>
-#include<math.h>
+#include <stdio.h>
+#include <math.h>
 
 typedef long long ll;
-
-int n;
-ll arr[100001];
 
 int prime(ll n)
 {
@@ -16,8 +13,6 @@ int prime(ll n)
 
 int tprime(ll n)
 {
-	if(n%2 == 0 && n > 4 || n < 4)
-		return 0;
     ll sqrt_n = (ll)sqrt(n);
     if(sqrt_n*sqrt_n == n && prime(sqrt_n))
         return 1;
@@ -26,11 +21,13 @@ int tprime(ll n)
 
 int main()
 {
-	scanf("%d", &n);
-	for(int i = 0; i < n; ++i)
+	int t;
+	scanf("%d", &t);
+	while(t--)
 	{
-		scanf("%lld", &arr[i]);
-		if(tprime(arr[i]))
+		ll n;
+		scanf("%lld", &n);
+		if(tprime(n))
 			printf("YES\n");
 		else
 			printf("NO\n");
